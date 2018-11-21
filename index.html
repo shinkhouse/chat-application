@@ -234,6 +234,7 @@
                     $('#messages').append($('<li class="username-content">').text(data.username));
                     $('#messages').append($('<li class="message-content">').text(data.message));
                 }
+                $("#messages").scrollTop($("#messages")[0].scrollHeight);
             });
 
             socket.on('user is typing', function (data) {
