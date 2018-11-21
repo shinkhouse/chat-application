@@ -192,6 +192,14 @@
                     socket.emit('user is not typing');
                 }
             })
+            socket.on('chat history', function(data) {
+                console.log(data);
+                for(var i in data) {
+                    $('#messages').append($('<li class="username-content">').text(data[i].username));
+                    $('#messages').append($('<li class="message-content">').text(data[i].message));
+                    $("#messages").scrollTop($("#messages")[0].scrollHeight);
+                }
+            })
             socket.on('chat message', function (data) {
                 $('#messages').append($('<li class="username-content">').text(data.username));
                 $('#messages').append($('<li class="message-content">').text(data.message));

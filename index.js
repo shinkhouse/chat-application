@@ -1,6 +1,9 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+const fs = require('fs');
+var chatHistory = [];
+
 
 var emojiArray = {
     ":)":"0x1F642", 
@@ -26,12 +29,18 @@ app.get('/', function(req, res) {
 
 io.on('connection', function(socket) {
     // io.emit('chat message', 'Someone connected');
+
     socket.on('disconnect', function() {
         io.emit('user removed', socket.username);
     })
     socket.on('user added', function(username) {
         socket.username = username;
         io.emit('user added', username);
+        fs.readFile('messages.json', function (err, data) {
+            chatHistory = JSON.parse(data);
+            socket.emit('chat history', chatHistory);
+        });
+        
     });
 
     socket.on('chat message', function(data) {
@@ -39,11 +48,20 @@ io.on('connection', function(socket) {
             var regex = new RegExp(escapeSpecialChars(i), 'gim');
             data = data.replace(regex, String.fromCodePoint(emojiArray[i]));
         }
-
-        io.emit('chat message', {
+        var messageData = {
             username: socket.username,
             message: data
-        });
+        }
+
+        fs.readFile('messages.json', function(err, data) {
+            var json = JSON.parse(data);
+            json.push(messageData);
+            fs.writeFile("messages.json",JSON.stringify(json), function(err) {
+                if(err) throw err;
+                console.log("saved");
+            });
+        })
+        io.emit('chat message', messageData);
     })
 
     socket.on('user is typing', function() {
@@ -55,6 +73,6 @@ io.on('connection', function(socket) {
     })
 })
 
-http.listen(process.env.PORT || 9445, function() {
+http.listen(process.env.PORT || 9446, function() {
     console.log('listening on *:9445 or ' || process.env.PORT);
 });
