@@ -1,5 +1,5 @@
 {
-  "name": "Chat App",
+  "name": "shinkhouse chat app",
   "version": "0.0.1",
   "description": "Chat Application w/ Socket.io",
   "dependencies": {
