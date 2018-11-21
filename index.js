@@ -29,16 +29,24 @@ app.get('/', function(req, res) {
 
 io.on('connection', function(socket) {
     // io.emit('chat message', 'Someone connected');
-
+    socket.emit('check for username');
     socket.on('disconnect', function() {
         io.emit('user removed', socket.username);
     })
-    socket.on('user added', function(username) {
+    socket.on('user reconnected', function(username) {
         socket.username = username;
-        io.emit('user added', username);
         fs.readFile('messages.json', function (err, data) {
             chatHistory = JSON.parse(data);
             socket.emit('chat history', chatHistory);
+            io.emit('user reconnected', username);
+        });
+    })
+    socket.on('user added', function(username) {
+        socket.username = username;
+        fs.readFile('messages.json', function (err, data) {
+            chatHistory = JSON.parse(data);
+            socket.emit('chat history', chatHistory);
+            io.emit('user added', username);
         });
         
     });

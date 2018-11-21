@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
     <title>Socket.IO chat</title>
     <meta charset="UTF-8">
@@ -123,12 +124,24 @@
             padding: 5px 10px;
             z-index: 1;
             display: table;
-            background-color: #02A6FF;
-            color: white;
+            background-color: rgb(204, 204, 204);
+            color: rgba(0,0,0,.84);
             margin: 0px 10px;
             margin-bottom: 5px;
             border-radius: 15px;
             max-width: 500px;
+            clear: both;
+        }
+
+        .my-username {
+            float: right;
+            /* display: none !important; */
+        }
+
+        .my-message {
+            background-color: #02A6FF !important;
+            color: white !important;
+            float: right;
         }
 
         .username-content {
@@ -177,7 +190,7 @@
 
             var socket = io();
             $('#message-send').submit(function () {
-                if ($('#m').val().length > 0) {
+                if ($('#m').val().trim().length > 0) {
                     socket.emit('chat message', $('#m').val());
                     $('#m').val('');
                     socket.emit('user is not typing');
@@ -192,18 +205,31 @@
                     socket.emit('user is not typing');
                 }
             })
-            socket.on('chat history', function(data) {
+            socket.on('check for username', function () {
+                if (username) {
+                    socket.emit('user reconnected', username);
+                } else {
+                    $('.addUser').show();
+                    $('#message-send').hide();
+                }
+            })
+            socket.on('chat history', function (data) {
                 console.log(data);
-                for(var i in data) {
-                    $('#messages').append($('<li class="username-content">').text(data[i].username));
-                    $('#messages').append($('<li class="message-content">').text(data[i].message));
+                for (var i in data) {
+                    if (username == data[i].username) {
+                        $('#messages').append($('<li class="username-content my-username">').text(data[i].username));
+                        $('#messages').append($('<li class="message-content my-message">').text(data[i].message));
+                    } else {
+                        $('#messages').append($('<li class="username-content">').text(data[i].username));
+                        $('#messages').append($('<li class="message-content">').text(data[i].message));
+                    }
                     $("#messages").scrollTop($("#messages")[0].scrollHeight);
                 }
             })
             socket.on('chat message', function (data) {
-                $('#messages').append($('<li class="username-content">').text(data.username));
-                $('#messages').append($('<li class="message-content">').text(data.message));
-                $("#messages").scrollTop($("#messages")[0].scrollHeight);
+                $('#messages').append($('<li class="username-content my-username">').text(data.username));
+                $('#messages').append($('<li class="message-content my-message">').text(data.message));
+
             });
 
             socket.on('user is typing', function (data) {
@@ -221,15 +247,22 @@
 
             socket.on('user added', function (username) {
                 $('#messages').append($('<li class="user-update">').text(username + " has joined."));
+                $("#messages").scrollTop($("#messages")[0].scrollHeight);
+            });
+
+            socket.on('user reconnected', function (username) {
+                $('#messages').append($('<li class="user-update">').text(username + " has reconnected."));
+                $("#messages").scrollTop($("#messages")[0].scrollHeight);
             });
 
             socket.on('user removed', function (username) {
-                if(!username) {
+                if (!username) {
                     $('#messages').append($('<li class="user-update">').text("Someone has left."));
+                    $("#messages").scrollTop($("#messages")[0].scrollHeight);
                 } else {
                     $('#messages').append($('<li class="user-update">').text(username + " has left."));
+                    $("#messages").scrollTop($("#messages")[0].scrollHeight);
                 }
-                
             });
         });
     </script>
