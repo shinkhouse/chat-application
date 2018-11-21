@@ -19,7 +19,7 @@ function escapeSpecialChars(regex) {
     return regex.replace(/([()[{*+.$^\\|?])/g, '\\$1');
 }
 
-app.get('/chat', function(req, res) {
+app.get('/', function(req, res) {
     // res.send('<h1>Hello, world!</h1>');
     res.sendFile(__dirname + '/index.html');
 });
