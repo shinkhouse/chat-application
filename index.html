@@ -227,9 +227,13 @@
                 }
             })
             socket.on('chat message', function (data) {
-                $('#messages').append($('<li class="username-content my-username">').text(data.username));
-                $('#messages').append($('<li class="message-content my-message">').text(data.message));
-
+                if (username == data[i].username) {
+                    $('#messages').append($('<li class="username-content my-username">').text(data[i].username));
+                    $('#messages').append($('<li class="message-content my-message">').text(data[i].message));
+                } else {
+                    $('#messages').append($('<li class="username-content">').text(data[i].username));
+                    $('#messages').append($('<li class="message-content">').text(data[i].message));
+                }
             });
 
             socket.on('user is typing', function (data) {
