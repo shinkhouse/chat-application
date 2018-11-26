@@ -14,5 +14,13 @@
     {
         "username": "shinkhouse",
         "message": "It's also cool that I can add my own name so people know who I am... AND emojis! 🙂 "
+    },
+    {
+        "username": "shinkhouse",
+        "message": "New feature: You can now private message users with the command: '/private [username] [message]'"
+    },
+    {
+        "username": "shinkhouse",
+        "message": "Example: /private shinkhouse How's the weather in Houston?"
     }
 ]
