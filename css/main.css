@@ -1,0 +1,248 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 999px;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        nav {
+            background: #02A6FF;
+            height: 50px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            z-index: 5;
+            position: relative;
+            padding: 10px;
+        }
+
+        nav h2 {
+            color: rgba(255, 255, 255, .74);
+            font-weight: 300;
+        }
+
+        .addUser {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #message-send {
+            background: #E5E4E2;
+            padding: 3px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        #message-send input {
+            border: 0;
+            padding: 10px;
+            width: calc(100% - 125px);
+            margin-right: 5px;
+            border-radius: 50px;
+            outline: none;
+        }
+
+        input {
+            padding: 10px;
+            height: 36px;
+            outline: none;
+        }
+
+        button {
+            width: 70px;
+            background: #02A6FF;
+            border: none;
+            padding: 10px;
+            color: white;
+            text-transform: uppercase;
+            cursor: pointer;
+            outline: none;
+        }
+
+        #message-send button {
+            width: 70px;
+            background: #02A6FF;
+            border: none;
+            padding: 10px;
+            color: white;
+            border-radius: 50px;
+            text-transform: uppercase;
+            cursor: pointer;
+            outline: none;
+        }
+        .emoji-menu-button {
+                background: #02A6FF;
+    border: none;
+    color: white;
+    border-radius: 50px;
+    text-transform: uppercase;
+    cursor: pointer;
+    outline: none;
+    width: 37px;
+    height: 37px;
+    font-size: 20px;
+    line-height: 27px;
+    padding: 5px;
+    display: inline-block;
+        }
+
+        #message-send button:hover,
+        button:hover, .emoji-menu-button:hover {
+            background: #0288D1;
+            transition: 0.2s;
+        }
+
+        .typing {
+            padding: 5px 10px;
+            margin: 10px !important;
+        }
+
+        #messages {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            height: calc(100vh - 95px);
+            overflow-y: auto;
+        }
+
+        #messages li {
+            padding: 5px 10px;
+            z-index: 1;
+            display: table;
+            background-color: rgb(204, 204, 204);
+            color: rgba(0,0,0,.84);
+            margin: 0px 10px;
+            margin-bottom: 5px;
+            border-radius: 15px;
+            max-width: 500px;
+            clear: both;
+        }
+
+        .my-username {
+            float: right;
+            /* display: none !important; */
+        }
+
+        .my-message {
+            background-color: #02A6FF !important;
+            color: white !important;
+            float: right;
+        }
+
+        .username-content {
+            background-color: transparent !important;
+            color: grey !important;
+            font-size: 12px !important;
+            padding: 0px !important;
+            margin: 0px 10px !important;
+            margin-top: 5px !important;
+        }
+
+        .user-update {
+            margin: 10px auto !important;
+            background-color: transparent !important;
+            color: grey !important;
+        }
+
+        /* Emoji Menu CSS */
+
+        /* .emoji-menu-button {
+  outline: none;
+  color: white;
+  background: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 24px;
+  border-radius: 50px;
+  position: absolute;
+  top:70%;
+  left: 50%;
+  transform: translate(-50%,-30%);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+} */
+.emoji-dialog {
+  display: none;
+  margin: 0 auto;
+  border-radius: 5px;
+  background: white;
+  padding: 5px;
+  width: 300px;
+  height: 220px;
+  position: absolute;
+  bottom:50px;
+  right: 90px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.emoji-nav {
+  width: 300px;
+  height: 40px;
+  display: flex;
+  position: absolute;
+  background: white;
+  z-index: 1;
+  bottom: 0;
+}
+.emoji-nav .emoji {
+  justify-content: space-between;
+  cursor: pointer;
+  flex-grow: 1;
+  text-align: center;
+  line-height: 40px;
+  height: 40px;
+}
+
+.emoji-menu {
+  background: white;
+  width: 300px;
+  height: 180px;
+  overflow-y: auto;
+}
+
+.emoji {
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  line-height: 25px;
+  width: 26px;
+  height: 26px;
+  -webkit-user-select: none;  
+  -moz-user-select: none;     
+  -ms-user-select: none;      
+  user-select: none;          
+}
+.emoji:hover {
+  background: #C6C8CA;
+  transition: 0.2s;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.active {
+/*   box-sizing:border-box; */
+  background: #0096ff;
+}
+.active:hover {
+  background: #007FDB;
+  transition: .2s;
+}

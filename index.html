@@ -1,4 +1,3 @@
-<!doctype html>
 <html>
 
 <head>
@@ -6,159 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        /* Track */
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-        /* Handle */
-        ::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 999px;
-        }
-
-        /* Handle on hover */
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-
-        nav {
-            background: #02A6FF;
-            height: 50px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-            z-index: 5;
-            position: relative;
-            padding: 10px;
-        }
-
-        nav h2 {
-            color: rgba(255, 255, 255, .74);
-            font-weight: 300;
-        }
-
-        .addUser {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        #message-send {
-            background: #E5E4E2;
-            padding: 3px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-
-        #message-send input {
-            border: 0;
-            padding: 10px;
-            width: calc(100% - 75px);
-            margin-right: 5px;
-            border-radius: 50px;
-            outline: none;
-        }
-
-        input {
-            padding: 10px;
-            height: 36px;
-            outline: none;
-        }
-
-        button {
-            width: 70px;
-            background: #02A6FF;
-            border: none;
-            padding: 10px;
-            color: white;
-            text-transform: uppercase;
-            cursor: pointer;
-            outline: none;
-        }
-
-        #message-send button {
-            width: 70px;
-            background: #02A6FF;
-            border: none;
-            padding: 10px;
-            color: white;
-            border-radius: 50px;
-            text-transform: uppercase;
-            cursor: pointer;
-            outline: none;
-        }
-
-        #message-send button:hover,
-        button:hover {
-            background: #0288D1;
-            transition: 0.2s;
-        }
-
-        .typing {
-            padding: 5px 10px;
-            margin: 10px !important;
-        }
-
-        #messages {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            height: calc(100vh - 92px);
-            overflow-y: auto;
-        }
-
-        #messages li {
-            padding: 5px 10px;
-            z-index: 1;
-            display: table;
-            background-color: rgb(204, 204, 204);
-            color: rgba(0,0,0,.84);
-            margin: 0px 10px;
-            margin-bottom: 5px;
-            border-radius: 15px;
-            max-width: 500px;
-            clear: both;
-        }
-
-        .my-username {
-            float: right;
-            /* display: none !important; */
-        }
-
-        .my-message {
-            background-color: #02A6FF !important;
-            color: white !important;
-            float: right;
-        }
-
-        .username-content {
-            background-color: transparent !important;
-            color: grey !important;
-            font-size: 12px !important;
-            padding: 0px !important;
-            margin: 0px 10px !important;
-            margin-top: 5px !important;
-        }
-
-        .user-update {
-            margin: 10px auto !important;
-            background-color: transparent !important;
-            color: grey !important;
-        }
-    </style>
+    <link href="/css/main.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
@@ -168,109 +15,50 @@
     <div class="addUser">
         <input id="usernamefield" placeholder="Pick a username" autocomplete="off"><button id="username-submit">Submit</button>
     </div>
+    <div class="emoji-dialog">
+        <div class="emoji-menu">
+            <div id="activities-menu"></div>
+            <div id="flags-menu"></div>
+            <div id="foods-menu"></div>
+            <div id="natures-menu"></div>
+            <div id="objects-menu"></div>
+            <div id="peoples-menu"></div>
+            <div id="symbols-menu"></div>
+            <div id="travels-menu"></div>
+        </div>
+        <div class="emoji-nav">
+            <div class="emoji active" id="activities-button">⚽</div>
+            <!--   <div class="emoji" id="flags-button">🏀</div> -->
+            <div class="emoji" id="foods-button">🍩</div>
+            <div class="emoji" id="natures-button">🌊</div>
+            <div class="emoji" id="objects-button">📷</div>
+            <div class="emoji" id="peoples-button">🕵</div>
+            <div class="emoji" id="symbols-button">💖</div>
+            <div class="emoji" id="travels-button">🛫</div>
+        </div>
+    </div>
     <ul id="messages">
+        
     </ul>
     <form id="message-send" action="">
-        <input placeholder="Type a message here" id="m" autocomplete="off" /><button>Send</button>
+        <input placeholder="Type a message here" id="m" autocomplete="off" />
+        <div class="emoji-menu-button">🙂</div>
+        <button>Send</button>
     </form>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-    <script>
-        $(function () {
-            var username = "";
-            $('#message-send').hide();
-            $('#username-submit').on('click', function () {
-                username = $('#usernamefield').val().trim();
-                if (username) {
-                    socket.emit('user added', username);
-                }
-                $('.addUser').hide();
-                $('#message-send').show();
-            });
+    <script src="js/chat.js"></script>
 
-            var socket = io();
-            $('#message-send').submit(function () {
-                if ($('#m').val().trim().length > 0) {
-                    socket.emit('chat message', $('#m').val());
-                    $('#m').val('');
-                    socket.emit('user is not typing');
-                }
-                return false;
-            });
-
-            $('#m').on('input', function () {
-                if ($('#m').val().length > 0) {
-                    socket.emit('user is typing');
-                } else {
-                    socket.emit('user is not typing');
-                }
-            })
-            socket.on('check for username', function () {
-                if (username) {
-                    socket.emit('user reconnected', username);
-                } else {
-                    $('.addUser').show();
-                    $('#message-send').hide();
-                }
-            })
-            socket.on('chat history', function (data) {
-                console.log(data);
-                for (var i in data) {
-                    if (username == data[i].username) {
-                        $('#messages').append($('<li class="username-content my-username">').text(data[i].username));
-                        $('#messages').append($('<li class="message-content my-message">').text(data[i].message));
-                    } else {
-                        $('#messages').append($('<li class="username-content">').text(data[i].username));
-                        $('#messages').append($('<li class="message-content">').text(data[i].message));
-                    }
-                    $("#messages").scrollTop($("#messages")[0].scrollHeight);
-                }
-            })
-            socket.on('chat message', function (data) {
-                if (username == data.username) {
-                    $('#messages').append($('<li class="username-content my-username">').text(data.username));
-                    $('#messages').append($('<li class="message-content my-message">').text(data.message));
-                } else {
-                    $('#messages').append($('<li class="username-content">').text(data.username));
-                    $('#messages').append($('<li class="message-content">').text(data.message));
-                }
-                $("#messages").scrollTop($("#messages")[0].scrollHeight);
-            });
-
-            socket.on('user is typing', function (data) {
-                if ($('.typing').length === 0) {
-                    if (username != data) {
-                        $('#messages').append($('<li class="typing">').text(data + " is typing..."));
-                    }
-                }
-                $('.typing').show();
-            })
-
-            socket.on('user is not typing', function () {
-                $('.typing').remove();
-            });
-
-            socket.on('user added', function (username) {
-                $('#messages').append($('<li class="user-update">').text(username + " has joined."));
-                $("#messages").scrollTop($("#messages")[0].scrollHeight);
-            });
-
-            socket.on('user reconnected', function (username) {
-                $('#messages').append($('<li class="user-update">').text(username + " has reconnected."));
-                $("#messages").scrollTop($("#messages")[0].scrollHeight);
-            });
-
-            socket.on('user removed', function (username) {
-                if (!username) {
-                    $('#messages').append($('<li class="user-update">').text("Someone has left."));
-                    $("#messages").scrollTop($("#messages")[0].scrollHeight);
-                } else {
-                    $('#messages').append($('<li class="user-update">').text(username + " has left."));
-                    $("#messages").scrollTop($("#messages")[0].scrollHeight);
-                }
-            });
-        });
-    </script>
+    
+    <script src="js/emoji-menu/Activity.js"></script>
+    <script src="js/emoji-menu/Flags.js"></script>
+    <script src="js/emoji-menu/Food.js"></script>
+    <script src="js/emoji-menu/Nature.js"></script>
+    <script src="js/emoji-menu/Objects.js"></script>
+    <script src="js/emoji-menu/People.js"></script>
+    <script src="js/emoji-menu/Symbols.js"></script>
+    <script src="js/emoji-menu/Travel.js"></script>
+    <script src="js/emoji-menu/emoji-menu.js"></script>
 </body>
 
 </html>

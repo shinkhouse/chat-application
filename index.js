@@ -1,9 +1,10 @@
 var app = require('express')();
+const express = require('express');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 const fs = require('fs');
 var chatHistory = [];
-
+var usersList = [];
 
 var emojiArray = {
     ":)":"0x1F642", 
@@ -22,27 +23,35 @@ function escapeSpecialChars(regex) {
     return regex.replace(/([()[{*+.$^\\|?])/g, '\\$1');
 }
 
-app.get('/', function(req, res) {
-    // res.send('<h1>Hello, world!</h1>');
-    res.sendFile(__dirname + '/index.html');
-});
+app.use(express.static(__dirname + '/'));
 
 io.on('connection', function(socket) {
     // io.emit('chat message', 'Someone connected');
     socket.emit('check for username');
     socket.on('disconnect', function() {
         io.emit('user removed', socket.username);
-    })
+    });
     socket.on('user reconnected', function(username) {
         socket.username = username;
+        usersList.push({
+            "user": username,
+            "socket": socket,
+            "status": 1
+        });
         fs.readFile('messages.json', function (err, data) {
             chatHistory = JSON.parse(data);
             socket.emit('chat history', chatHistory);
             io.emit('user reconnected', username);
         });
-    })
+        console.log(usersList);
+    });
     socket.on('user added', function(username) {
         socket.username = username;
+        usersList.push({
+            "user": username,
+            "socket": socket,
+            "status": 1
+        });
         fs.readFile('messages.json', function (err, data) {
             chatHistory = JSON.parse(data);
             socket.emit('chat history', chatHistory);
@@ -50,35 +59,58 @@ io.on('connection', function(socket) {
         });
         
     });
+    socket.on('show users', function() {
+        socket.emit('show users', userList);
+    });
 
     socket.on('chat message', function(data) {
-        for (var i in emojiArray) {
-            var regex = new RegExp(escapeSpecialChars(i), 'gim');
-            data = data.replace(regex, String.fromCodePoint(emojiArray[i]));
-        }
-        var messageData = {
-            username: socket.username,
-            message: data
-        }
+        console.log(socket.username);
+        var messageData = {};
+        if (data.indexOf("/private") == "0") {
+            console.log(usersList);
+            var command = data.split(" ");
+            var username = command[1];
+            var message = command.slice(2).join(" ");
 
-        fs.readFile('messages.json', function(err, data) {
-            var json = JSON.parse(data);
-            json.push(messageData);
-            fs.writeFile("messages.json",JSON.stringify(json), function(err) {
-                if(err) throw err;
-                console.log("saved");
-            });
-        })
-        io.emit('chat message', messageData);
-    })
+            var messageData = {
+                username: socket.username,
+                message: message
+            }
+            for(var i in usersList) {
+                if(usersList[i].user == username) {
+                    console.log(usersList[i].username);
+                    usersList[i].socket.emit('chat message', messageData);
+                    socket.emit('chat message', messageData);
+                }
+            }
+        } else {
+            for (var i in emojiArray) {
+                var regex = new RegExp(escapeSpecialChars(i), 'gim');
+                data = data.replace(regex, String.fromCodePoint(emojiArray[i]));
+            }
+            messageData = {
+                username: socket.username,
+                message: data
+            }
+            fs.readFile('messages.json', function (err, data) {
+                var json = JSON.parse(data);
+                json.push(messageData);
+                fs.writeFile("messages.json", JSON.stringify(json), function (err) {
+                    if (err) throw err;
+                    console.log("saved");
+                });
+            })
+            io.emit('chat message', messageData);
+        }
+    });
 
     socket.on('user is typing', function() {
         io.emit('user is typing', socket.username);
-    })
+    });
 
     socket.on('user is not typing', function () {
         io.emit('user is not typing', 'A user is not typing');
-    })
+    });
 })
 
 http.listen(process.env.PORT || 9446, function() {
