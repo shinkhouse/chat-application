@@ -48,7 +48,6 @@ $(function () {
         }
     })
     socket.on('chat history', function (data) {
-        console.log(data);
         for (var i in data) {
             if (username == data[i].username) {
                 $('#messages').append($('<li class="username-content my-username">').text(data[i].username));

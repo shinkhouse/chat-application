@@ -24,13 +24,9 @@ $('.emoji-menu-button').click(function () {
 
 function changeMenu(button) {
     var emojiMenus = $(".emoji-menu [id*='menu']").toArray();
-    console.log(button);
     var newButton = button.split('-')[0];
     for (var i in emojiMenus) {
         var newMenu = emojiMenus[i].id.split('-')[0];
-        console.log(button);
-        console.log(newMenu);
-        console.log(newButton);
         if (newMenu == newButton) {
             $('#' + newMenu + '-menu').show();
         } else {
