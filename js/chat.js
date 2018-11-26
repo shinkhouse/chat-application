@@ -1,6 +1,16 @@
 $(function () {
     var username = "";
     $('#message-send').hide();
+    $('#usernamefield').keydown(function(e) {
+        if(e.keyCode == 13) {
+            username = $('#usernamefield').val().trim();
+            if (username) {
+                socket.emit('user added', username);
+            }
+            $('.addUser').hide();
+            $('#message-send').show();
+        }
+    })
     $('#username-submit').on('click', function () {
         username = $('#usernamefield').val().trim();
         if (username) {
