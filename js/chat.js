@@ -3,6 +3,7 @@ $(function () {
     $('#message-send').hide();
     $('#usernamefield').keydown(function(e) {
         if(e.keyCode == 13) {
+            $('#messages, #message-send').show();
             username = $('#usernamefield').val().trim();
             if (username) {
                 socket.emit('user added', username);
@@ -12,12 +13,12 @@ $(function () {
         }
     })
     $('#username-submit').on('click', function () {
+        $('#messages, #message-send').show();
         username = $('#usernamefield').val().trim();
         if (username) {
             socket.emit('user added', username);
         }
         $('.addUser').hide();
-        $('#message-send').show();
     });
 
     var socket = io();
@@ -30,7 +31,7 @@ $(function () {
         return false;
     });
     $('#m').on('click', function() {
-        $('.emoji-dialog').hide();
+        $('.emoji-dialog').fadeOut({ duration: 100 });
     })
     $('#m').on('input', function () {
         if ($('#m').val().length > 0) {

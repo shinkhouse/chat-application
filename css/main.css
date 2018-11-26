@@ -38,15 +38,23 @@
             color: rgba(255, 255, 255, .74);
             font-weight: 300;
         }
-
         .addUser {
+            width: 100%;
+            height: calc(100% - 50px);
+            position: relative;
+            z-index: 99999;
+        }
+        .center {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
         }
-
+        #messages {
+            display: none;
+        }
         #message-send {
+            display: none;
             background: #E5E4E2;
             padding: 3px;
             position: fixed;
@@ -119,6 +127,8 @@
         }
 
         #messages {
+            /* background: #383838; */
+            background: #ffffff;
             list-style-type: none;
             margin: 0;
             padding: 0;
@@ -189,8 +199,8 @@
   border-radius: 5px;
   background: white;
   padding: 5px;
-  width: 300px;
-  height: 220px;
+  width: 310px;
+  height: 230px;
   position: absolute;
   bottom:50px;
   right: 90px;
