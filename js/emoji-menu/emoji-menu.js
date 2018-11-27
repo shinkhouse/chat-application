@@ -15,10 +15,10 @@ $('.emoji-nav .emoji').click(function () {
 
 $('.emoji-menu-button').click(function () {
     emojiButtonToggle = !emojiButtonToggle;
-    if(emojiButtonToggle) {
-        $('.emoji-dialog').fadeIn({ duration: 100 });
+    if (emojiButtonToggle) {
+        $('.emoji-dialog').addClass('move-up');
     } else {
-        $('.emoji-dialog').fadeOut({ duration: 100 });
+        $('.emoji-dialog').removeClass('move-up');
     }
 });
 

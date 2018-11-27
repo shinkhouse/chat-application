@@ -194,17 +194,26 @@
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 } */
 .emoji-dialog {
-  display: none;
   margin: 0 auto;
   border-radius: 5px;
   background: white;
   padding: 5px;
   width: 310px;
-  height: 230px;
+  height: 220px;
   position: absolute;
-  bottom:50px;
-  right: 90px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  bottom: 5px;
+  right: 85px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.26), 0 3px 6px rgba(0,0,0,0.43);
+  transition: all .15s ease-in-out; 
+  transform: translate(0px, 0px);
+  opacity: 0;
+  visibility: hidden;
+}
+.move-up {
+  visibility: visible;
+  opacity: 1;
+  transition: all .15s ease-in-out; 
+  transform: translate(0px, -50px);
 }
 .emoji-nav {
   width: 300px;
