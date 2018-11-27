@@ -31,7 +31,7 @@ $(function () {
         return false;
     });
     $('#m').on('click', function() {
-        $('.emoji-dialog').fadeOut({ duration: 100 });
+        $('.emoji-dialog').removeClass('move-up');
     })
     $('#m').on('input', function () {
         if ($('#m').val().length > 0) {
