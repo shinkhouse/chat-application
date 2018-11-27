@@ -43,7 +43,7 @@ io.on('connection', function(socket) {
             socket.emit('chat history', chatHistory);
             io.emit('user reconnected', username);
         });
-        console.log(usersList);
+        // console.log(usersList);
     });
     socket.on('user added', function(username) {
         socket.username = username;
@@ -64,25 +64,39 @@ io.on('connection', function(socket) {
     });
 
     socket.on('chat message', function(data) {
-        console.log(socket.username);
         var messageData = {};
         if (data.indexOf("/private") == "0") {
-            console.log(usersList);
+            // console.log(usersList);
             var command = data.split(" ");
             var username = command[1];
             var message = command.slice(2).join(" ");
 
-            var messageData = {
-                username: socket.username,
-                message: message
-            }
-            for(var i in usersList) {
-                if(usersList[i].user == username) {
-                    console.log(usersList[i].username);
-                    usersList[i].socket.emit('chat message', messageData);
-                    socket.emit('chat message', messageData);
+            if(username != socket.username) {
+                var messageData = {
+                    username: socket.username,
+                    message: message
                 }
+                for (var i in usersList) {
+                    if (usersList[i].user == username) {
+                        console.log(usersList[i].user);
+                        usersList[i].socket.emit('chat message', messageData);
+                        socket.emit('chat message', messageData);
+                    } else {
+                        var messageData = {
+                            username: "Server",
+                            message: "Error: This user was not found. Please try another user. 🙂"
+                        }
+                        socket.emit('chat message', messageData);
+                    }
+                }
+            } else {
+                var messageData = {
+                    username: "Server",
+                    message: "Error: You cannot send a message to yourself."
+                }
+                socket.emit('chat message', messageData);
             }
+            
         } else {
             for (var i in emojiArray) {
                 var regex = new RegExp(escapeSpecialChars(i), 'gim');
