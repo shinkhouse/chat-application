@@ -22,6 +22,18 @@ $('.emoji-menu-button').click(function () {
     }
 });
 
+$('.emoji-menu-button').hover(function () {
+    $('.emoji-menu-button').html("😄");
+});
+
+$('.emoji-menu-button').mouseout(function () {
+    $('.emoji-menu-button').html("🙂");
+});
+
+$('.emoji-menu-button').mousedown(function () {
+    $('.emoji-menu-button').html("😉");
+});
+
 function changeMenu(button) {
     var emojiMenus = $(".emoji-menu [id*='menu']").toArray();
     var newButton = button.split('-')[0];

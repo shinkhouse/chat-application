@@ -29,6 +29,13 @@ io.on('connection', function(socket) {
     // io.emit('chat message', 'Someone connected');
     socket.emit('check for username');
     socket.on('disconnect', function() {
+        // console.log(socket.username);
+        usersList.forEach(function(user, index, object) {
+            console.log(index);
+            if(user.user == socket.username) {
+                object.splice(index,1);
+            }
+        }); 
         io.emit('user removed', socket.username);
     });
     socket.on('user reconnected', function(username) {
@@ -76,9 +83,9 @@ io.on('connection', function(socket) {
                     username: socket.username,
                     message: message
                 }
+
                 for (var i in usersList) {
                     if (usersList[i].user == username) {
-                        console.log(usersList[i].user);
                         usersList[i].socket.emit('chat message', messageData);
                         socket.emit('chat message', messageData);
                     } else {

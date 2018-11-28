@@ -78,6 +78,7 @@ $(function () {
             }
         }
         $('.typing').show();
+        $("#messages").scrollTop($("#messages")[0].scrollHeight);
     })
 
     socket.on('user is not typing', function () {
