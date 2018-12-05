@@ -1,106 +1,114 @@
 * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
-        }
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
 
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
+::-webkit-scrollbar {
+    width: 10px;
+}
 
-        /* Track */
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
+/* Track */
 
-        /* Handle */
-        ::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 999px;
-        }
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
 
-        /* Handle on hover */
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
+/* Handle */
 
-        nav {
-            background: #02A6FF;
-            height: 50px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-            z-index: 5;
-            position: relative;
-            padding: 10px;
-        }
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 999px;
+}
 
-        nav h2 {
-            color: rgba(255, 255, 255, .74);
-            font-weight: 300;
-        }
-        .addUser {
-            width: 100%;
-            height: calc(100% - 50px);
-            position: relative;
-            z-index: 99999;
-        }
-        .center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        #messages {
-            display: none;
-        }
-        #message-send {
-            display: none;
-            background: #E5E4E2;
-            padding: 3px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
+/* Handle on hover */
 
-        #message-send input {
-            border: 0;
-            padding: 10px;
-            width: calc(100% - 125px);
-            margin-right: 5px;
-            border-radius: 50px;
-            outline: none;
-        }
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
 
-        input {
-            padding: 10px;
-            height: 36px;
-            outline: none;
-        }
+nav {
+    background: #02A6FF;
+    height: 50px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    z-index: 5;
+    position: relative;
+    padding: 10px;
+}
 
-        button {
-            width: 70px;
-            background: #02A6FF;
-            border: none;
-            padding: 10px;
-            color: white;
-            text-transform: uppercase;
-            cursor: pointer;
-            outline: none;
-        }
+nav h2 {
+    color: rgba(255, 255, 255, .74);
+    font-weight: 300;
+}
 
-        #message-send button {
-            width: 70px;
-            background: #02A6FF;
-            border: none;
-            padding: 10px;
-            color: white;
-            border-radius: 50px;
-            text-transform: uppercase;
-            cursor: pointer;
-            outline: none;
-        }
-        .emoji-menu-button {
-                background: #02A6FF;
+.addUser {
+    width: 100%;
+    height: calc(100% - 50px);
+    position: relative;
+    z-index: 99999;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#messages {
+    display: none;
+}
+
+#message-send {
+    display: none;
+    background: #E5E4E2;
+    padding: 3px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+#message-send input {
+    border: 0;
+    padding: 10px;
+    width: calc(100% - 125px);
+    margin-right: 5px;
+    border-radius: 50px;
+    outline: none;
+}
+
+input {
+    padding: 10px;
+    height: 36px;
+    outline: none;
+}
+
+button {
+    width: 70px;
+    background: #02A6FF;
+    border: none;
+    padding: 10px;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+    outline: none;
+}
+
+#message-send button {
+    width: 70px;
+    background: #02A6FF;
+    border: none;
+    padding: 10px;
+    color: white;
+    border-radius: 50px;
+    text-transform: uppercase;
+    cursor: pointer;
+    outline: none;
+}
+
+.emoji-menu-button {
+    background: #02A6FF;
     border: none;
     color: white;
     border-radius: 50px;
@@ -113,71 +121,70 @@
     line-height: 27px;
     padding: 5px;
     display: inline-block;
-        }
+}
 
-        #message-send button:hover,
-        button:hover, .emoji-menu-button:hover {
-            background: #0288D1;
-            transition: 0.2s;
-        }
+#message-send button:hover, button:hover, .emoji-menu-button:hover {
+    background: #0288D1;
+    transition: 0.2s;
+}
 
-        .typing {
-            padding: 5px 10px;
-            margin: 10px !important;
-        }
+.typing {
+    padding: 5px 10px;
+    margin: 10px !important;
+}
 
-        #messages {
-            /* background: #383838; */
-            background: #ffffff;
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            height: calc(100vh - 95px);
-            overflow-y: auto;
-        }
+#messages {
+    /* background: #383838; */
+    background: #ffffff;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: calc(100vh - 95px);
+    overflow-y: auto;
+}
 
-        #messages li {
-            padding: 5px 10px;
-            z-index: 1;
-            display: table;
-            background-color: rgb(204, 204, 204);
-            color: rgba(0,0,0,.84);
-            margin: 0px 10px;
-            margin-bottom: 5px;
-            border-radius: 15px;
-            max-width: 500px;
-            clear: both;
-        }
+#messages li {
+    padding: 5px 10px;
+    z-index: 1;
+    display: table;
+    background-color: rgb(204, 204, 204);
+    color: rgba(0, 0, 0, .84);
+    margin: 0px 10px;
+    margin-bottom: 5px;
+    border-radius: 15px;
+    max-width: 500px;
+    clear: both;
+}
 
-        .my-username {
-            float: right;
-            /* display: none !important; */
-        }
+.my-username {
+    float: right;
+    /* display: none !important; */
+}
 
-        .my-message {
-            background-color: #02A6FF !important;
-            color: white !important;
-            float: right;
-        }
+.my-message {
+    background-color: #02A6FF !important;
+    color: white !important;
+    float: right;
+}
 
-        .username-content {
-            background-color: transparent !important;
-            color: grey !important;
-            font-size: 12px !important;
-            padding: 0px !important;
-            margin: 0px 10px !important;
-            margin-top: 5px !important;
-        }
+.username-content {
+    background-color: transparent !important;
+    color: grey !important;
+    font-size: 12px !important;
+    padding: 0px !important;
+    margin: 0px 10px !important;
+    margin-top: 5px !important;
+}
 
-        .user-update {
-            margin: 10px auto !important;
-            background-color: transparent !important;
-            color: grey !important;
-        }
+.user-update {
+    margin: 10px auto !important;
+    background-color: transparent !important;
+    color: grey !important;
+}
 
-        /* Emoji Menu CSS */
+/* Emoji Menu CSS */
 
-        /* .emoji-menu-button {
+/* .emoji-menu-button {
   outline: none;
   color: white;
   background: white;
@@ -193,75 +200,101 @@
   transform: translate(-50%,-30%);
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 } */
+
 .emoji-dialog {
-  margin: 0 auto;
-  border-radius: 5px;
-  background: white;
-  padding: 5px;
-  width: 310px;
-  height: 220px;
-  position: absolute;
-  bottom: 5px;
-  right: 85px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.26), 0 3px 6px rgba(0,0,0,0.43);
-  transition: all .15s ease-in-out; 
-  transform: translate(0px, 0px);
-  opacity: 0;
-  visibility: hidden;
+    margin: 0 auto;
+    border-radius: 5px;
+    background: white;
+    padding: 5px;
+    width: 310px;
+    height: 280px;
+    position: absolute;
+    bottom: 5px;
+    right: 85px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.26), 0 3px 6px rgba(0, 0, 0, 0.43);
+    transition: all .15s ease-in-out;
+    transform: translate(0px, 0px);
+    opacity: 0;
+    visibility: hidden;
 }
+
+.emoji-search {
+    height: 35px;
+    width: 100%;
+}
+
+.emoji-search input {
+    height: 30px !important;
+    box-sizing: border-box;
+    width: 100%;
+    outline: none;
+    padding: 5px 10px;
+    border: 1px solid grey;
+    border-radius: 50px;
+}
+
+.emoji-search input:focus {
+    border: 1px solid #0096FF;
+}
+
 .move-up {
-  visibility: visible;
-  opacity: 1;
-  transition: all .15s ease-in-out; 
-  transform: translate(0px, -50px);
+    visibility: visible;
+    opacity: 1;
+    transition: all .15s ease-in-out;
+    transform: translate(0px, -50px);
 }
+
 .emoji-nav {
-  width: 300px;
-  height: 40px;
-  display: flex;
-  position: absolute;
-  background: white;
-  z-index: 1;
-  bottom: 0;
+    width: 300px;
+    height: 40px;
+    display: flex;
+    position: absolute;
+    background: white;
+    z-index: 1;
+    bottom: 0;
 }
+
 .emoji-nav .emoji {
-  justify-content: space-between;
-  cursor: pointer;
-  flex-grow: 1;
-  text-align: center;
-  line-height: 40px;
-  height: 40px;
+    justify-content: space-between;
+    cursor: pointer;
+    flex-grow: 1;
+    text-align: center;
+    line-height: 40px;
+    height: 40px;
 }
 
 .emoji-menu {
-  background: white;
-  width: 300px;
-  height: 180px;
-  overflow-y: auto;
+    background: white;
+    width: 300px;
+    height: 200px;
+    overflow-y: auto;
 }
 
 .emoji {
-  cursor: pointer;
-  display: inline-block;
-  text-align: center;
-  line-height: 25px;
-  width: 26px;
-  height: 26px;
-  -webkit-user-select: none;  
-  -moz-user-select: none;     
-  -ms-user-select: none;      
-  user-select: none;          
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    line-height: 25px;
+    width: 26px;
+    height: 26px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
+
 .emoji:hover {
-  background: #C6C8CA;
-  transition: 0.2s;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    background: #C6C8CA;
+    transition: 0.2s;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
+
 .active {
-/*   box-sizing:border-box; */
-  background: #0096ff;
+    /*   box-sizing:border-box; */
+    background: #0096ff;
 }
+
 .active:hover {
-  background: #007FDB;
-  transition: .2s;
+    background: #007FDB;
+    transition: .2s;
 }

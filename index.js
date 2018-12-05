@@ -31,7 +31,6 @@ io.on('connection', function(socket) {
     socket.on('disconnect', function() {
         // console.log(socket.username);
         usersList.forEach(function(user, index, object) {
-            console.log(index);
             if(user.user == socket.username) {
                 object.splice(index,1);
             }
