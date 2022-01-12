@@ -1,12 +1,6 @@
 [
-    {
-        "username": "shinkhouse",
-        "message": "Hey everyone!"
-    },
-    {
-        "username": "shinkhouse",
-        "message": "Welcome to my chat application"
-    },
+    { "username": "shinkhouse", "message": "Hey everyone!" },
+    { "username": "shinkhouse", "message": "Welcome to my chat application" },
     {
         "username": "shinkhouse",
         "message": "I love how the messages can be saved."

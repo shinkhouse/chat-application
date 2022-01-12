@@ -18,11 +18,19 @@ function getActiveMenu() {
 $('.emoji-menu-button').click(function () {
     emojiButtonToggle = !emojiButtonToggle;
     if (emojiButtonToggle) {
+        $('.emoji-dialog-background').addClass('show-background');
         $('.emoji-dialog').addClass('move-up');
     } else {
         $('.emoji-dialog').removeClass('move-up');
+        $('.emoji-dialog-background').removeClass('show-background');
     }
 });
+
+$('.emoji-dialog-background').click(() => {
+    emojiButtonToggle = false;
+    $('.emoji-dialog').removeClass('move-up');
+    $('.emoji-dialog-background').removeClass('show-background');
+})
 
 $('.emoji-menu-button').hover(function () {
     $('.emoji-menu-button').html("😄");
